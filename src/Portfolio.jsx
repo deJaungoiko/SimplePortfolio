@@ -72,11 +72,12 @@ export default function Portfolio({idx, ptf, save, deletePortfolio}){
     const toShow = []
     if(portfolio)
         for(let i in portfolio.coins){
+            
             toShow.push(<TableRow key={"ownedCoin"+i+portfolio.coins[i]} sx={{backgroundColor: "black"}}>
                 <TableCell sx={{color: colors.contrastText}}><div style={{display: "flex"}}><img style={{marginRight:"10px", marginLeft: "10px", width: "30px"}} src={portfolio.coins[i].image}/><div style={{marginTop: "9px"}}>{portfolio.coins[i].name}</div></div></TableCell>
-                <TableCell sx={{paddingTop: "27px", color: colors.contrastText}}>$ {parseFloat(portfolio.coins[i].current_price).toPrecision(8)}</TableCell>
+                <TableCell sx={{paddingTop: "27px", color: colors.contrastText}}>$ {portfolio.coins[i].current_price !== undefined ? parseFloat(portfolio.coins[i].current_price).toPrecision(8) : "ERROR"}</TableCell>
                 <TableCell sx={{paddingTop: "27px", color: colors.contrastText}}>{(portfolio.amounts[i]).toFixed(8)}</TableCell>
-                <TableCell sx={{paddingTop: "27px", color: colors.contrastText}} >$ {(portfolio.coins[i].current_price * portfolio.amounts[i]).toFixed(2)}</TableCell>
+                <TableCell sx={{paddingTop: "27px", color: colors.contrastText}} >$ { portfolio.coins[i].current_price !== undefined ? (portfolio.coins[i].current_price * portfolio.amounts[i]).toFixed(2) : "ERROR"}</TableCell>
                 
                 <TableCell sx={{paddingTop: "27px", color: colors.contrastText}} align="right">
                     <div style={{ width: "50px", display: "flex", flexDirection: "row"}}>
@@ -116,7 +117,7 @@ export default function Portfolio({idx, ptf, save, deletePortfolio}){
     
     let total = 0;
     for(let i in portfolio.coins){
-        total += portfolio.coins[i].current_price * portfolio.amounts[i];
+        total += portfolio.coins[i].current_price !== undefined ? portfolio.coins[i].current_price * portfolio.amounts[i] : 0;
     }
 
     return <>

@@ -11,6 +11,7 @@ export default function CoinList(){
         localStorage.setItem("coinList", JSON.stringify(coins));
 
         if(coins === undefined || coins === "undefined")
+        // fetch('https://api.coingecko.com/api/v3/coins/list', {headers: {accept: "application/json"}})
             fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc', {headers: {accept: "application/json"}})
             .then((response)=>{
                 response.json().then(response=>{
