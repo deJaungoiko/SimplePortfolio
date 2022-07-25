@@ -35,6 +35,10 @@ export default function Portfolios() {
   const save = (idx, portf)=>{
     setPortfolios([...portfolios.slice(0,idx), portf, ...portfolios.slice(idx+1, portfolios.length)])
   }
+  const deletePortfolio = ev=>{
+    ev.stopPropagation();
+    console.log(ev.target.id)
+  }
 
   const update = async ()=>{
     const newPortfs = portfolios;
@@ -74,7 +78,7 @@ export default function Portfolios() {
   if(portfolios)
     for(let i in portfolios){
       toShow.push(<div key={"portfolio-"+i}>
-        <Portfolio save={save} ptf={portfolios[i]} idx={i}></Portfolio>
+        <Portfolio deletePortfolio={deletePortfolio} save={save} ptf={portfolios[i]} idx={i}></Portfolio>
       </div>);
     }
 

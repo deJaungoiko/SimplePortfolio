@@ -1,11 +1,11 @@
 import { ThemeProvider } from "@emotion/react";
-import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Autocomplete, TextField } from "@mui/material";
+import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableRow } from "@mui/material";
 import { useEffect, useState } from "react"
 import theme from "./theme";
 import { Spring, Transition, animated } from "react-spring";
 import AutocompleteCoin from "./AutocompleteCoin";
 
-export default function Portfolio({idx, ptf, save}){
+export default function Portfolio({idx, ptf, save, deletePortfolio}){
     const [portfolio, setPortfolio] = useState(ptf);
     const [newName, setNewName] = useState(portfolio.name);
     const [showPortf, setShowPortf] = useState(false);
@@ -98,7 +98,6 @@ export default function Portfolio({idx, ptf, save}){
                             marginTop: showBuySellInput[3] === "sell"? "43px" : "10px"}}
                         onChange={(ev)=>setBuySell(ev.target.value)}
                         autoFocus="on"/> }
-                        
                         <div style={{width: "70px",display: "flex", flexDirection: "column"}}>
                             <Button style={{color: "green"}} id={"buysell-"+idx+"-"+i} onClick={ev=>{setShowBuySellInput([parseInt(ev.target.id.split("-")[1]), parseInt(ev.target.id.split("-")[2]), true, "buy"])}}>buy</Button>
                             <Button style={{color: "#aa5555"}} id={"buysell-"+idx+"-"+i} onClick={ev=>{setShowBuySellInput([parseInt(ev.target.id.split("-")[1]), parseInt(ev.target.id.split("-")[2]), true, "sell"])}}>sell</Button>
@@ -126,6 +125,10 @@ export default function Portfolio({idx, ptf, save}){
             <div style={{width: "150px", fontFamily: "roboto"}} onClick={ev=>{setChName(!chName); ev.stopPropagation()}}>{portfolio.name}</div> ||
             <input style={{border: "none", fontSize: "16px", outline: "none", width: "150px", fontFamily: "roboto", backgroundColor: "black", color: "white"}} onKeyDown={checkEnter} onBlur={ev=>{saveName()}} value={newName} autoFocus="on" onChange={ev=>setNewName(ev.target.value)} onClick={ev=>ev.stopPropagation()}/>)
         }
+        <div style={{width: "70%"}}></div>
+        <div style={{height: 0, marginTop: "-8px" }}>
+            <Button id={"delPortf-"+idx} onClick={deletePortfolio}>delete</Button>
+        </div>
         <div style={{fontFamily: "roboto"}}>
             $ {total.toFixed(2)}
         </div>
