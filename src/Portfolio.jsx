@@ -128,32 +128,12 @@ export default function Portfolio({idx, ptf, save, deletePortfolio}){
         }
         <div style={{width: "70%"}}></div>
         <div style={{height: 0, marginTop: "-8px" }}>
-            <Button id={"delPortf-"+idx} onClick={deletePortfolio}>delete</Button>
+            {/*<Button id={"delPortf-"+idx} onClick={deletePortfolio}>delete</Button>*/}
         </div>
         <div style={{fontFamily: "roboto"}}>
             $ {total.toFixed(2)}
         </div>
     </div>
-    {/* Convertir en clase para poder usar la Transition
-    <Transition native items={showPortf} from={{opacity: 0}} to={{opacity: 1}} leave{{opacity: 0}}>
-        {show => show && (props)=>(
-            <animated.div>
-                <Spring from={{opacity: 0}} to={{opacity: 1}}>{props=>{<div style={props}>
-                    <ThemeProvider theme={theme}>
-                        <TableContainer component={Paper}>
-                            <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                                <TableBody>
-                                    {toShow}
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
-                    </ThemeProvider>
-                    <Button variant="outlined" style={{margin: "10px"}}>Add coin</Button>
-                </div>}}</Spring>
-            </animated.div>
-        )}
-    </Transition>
-    */}
 
     {showPortf && <>
         <ThemeProvider theme={theme}>

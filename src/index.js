@@ -14,9 +14,9 @@ root.render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<Layout/>}>
-        <Route path="portfolio" element={<Portfolios/>}></Route>
+        <Route index element={<CoinList/>}></Route>
         <Route path="coins/:id" element={<ShowCoin/>}></Route>
-        <Route path="/" element={<CoinList/>}></Route>
+        <Route path="portfolio" element={<Portfolios/>}></Route>
       </Route>
     </Routes>
   </BrowserRouter>

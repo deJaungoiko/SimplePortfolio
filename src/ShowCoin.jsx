@@ -17,11 +17,12 @@ export default function ShowCoin(){
             });});
         }
     });
-
+    
+    //<img src={coin.image.small}></img>
+    //<img src={coin.image.thumb}></img>
+    
     return <>{coin && <>
         <img src={coin.image.large}></img>
-        <img src={coin.image.small}></img>
-        <img src={coin.image.thumb}></img>
         <div>
             {parse(coin.description.en)}
         </div>

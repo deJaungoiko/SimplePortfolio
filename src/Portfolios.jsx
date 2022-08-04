@@ -19,7 +19,7 @@ export default function Portfolios() {
   const addNewPortfolio = ()=>{
 
     let newPort;
-    if(portfolios !== undefined){
+    if(portfolios !== undefined && portfolios !== null){
       newPort = [ ...portfolios, {name: "New Portfolio", coins: [], amounts: []}];
     }else{
       newPort = [ { name: "New Portfolio", coins: [], amounts: []}];

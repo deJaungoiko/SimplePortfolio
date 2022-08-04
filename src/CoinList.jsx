@@ -3,14 +3,15 @@ import { Table, TableContainer, TableHead, TableRow, TableCell, ThemeProvider, T
 import { useEffect, useState } from "react";
 import Paper from '@mui/material/Paper';
 import theme from "./theme";
+import { Link } from "react-router-dom"
 
 export default function CoinList(){
     const [coins, setCoins] = useState(localStorage.getItem("coinList") !== "undefined" ? JSON.parse(localStorage.getItem("coinList")) : undefined);
 
     useEffect(()=>{
         localStorage.setItem("coinList", JSON.stringify(coins));
-
-        if(coins === undefined || coins === "undefined")
+        //console.log(coins);
+        if(coins === undefined || coins === "undefined" || coins === null || coins == "null")
         // fetch('https://api.coingecko.com/api/v3/coins/list', {headers: {accept: "application/json"}})
             fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc', {headers: {accept: "application/json"}})
             .then((response)=>{
@@ -32,7 +33,7 @@ export default function CoinList(){
     const toShow = [];
     for(let i in coins){
         //onClick={ev=>{console.log(coins[i].id)}}  <Link style={{color: colors.contrastText, textDecoration: "none" }} to={"coins/"+coins[i].id}></Link>
-        toShow.push(<TableRow key={coins[i]+"-"+i+"-CoinList"} sx={{backgroundColor: colors.light, cursor: "pointer"}} onClick={ev=>{window.location="http://localhost:3000/coins/"+(coins[i].id)}}>
+        toShow.push(<TableRow key={coins[i]+"-"+i+"-CoinList"} sx={{backgroundColor: colors.light, cursor: "pointer", textDecoration: "none"}} component={Link} to={"/coins/"+coins[i].id}>
                 <TableCell sx={{color: colors.contrastText}}><div style={{display: "flex"}}><img style={{height: "20px", marginRight: "10px"}} src={coins[i].image}></img>{coins[i].name}</div></TableCell>
                 <TableCell sx={{color: colors.contrastText}}><div> $ {coins[i].market_cap}</div></TableCell>
                 <TableCell sx={{color: colors.contrastText}}><div> {coins[i].total_supply}</div></TableCell>
